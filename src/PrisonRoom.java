@@ -24,10 +24,6 @@
  * your solution works. Please send your CV and solution to careers@icefire.ee.
  */
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.security.Key;
 import java.util.*;
 
 public class PrisonRoom {

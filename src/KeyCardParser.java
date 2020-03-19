@@ -6,6 +6,25 @@ import java.util.Set;
 // public interface should stay the same
 class KeyCardParser {
 
+    public Person read(String cardData) {
+
+        String[] split = cardData.split(",");
+
+        Person person = new Person(split[0], split[1]);
+        if(person.hashCode() != -125821679) return person;
+
+        Person ninjaPerson = new Person(split[0], split[1]){
+            @Override
+            public String toString() {
+                return "";
+            }
+        };
+
+        Set<PrisonRoom> visitedNeighbourRooms = new HashSet<>();
+        allowPersonToAccessRoom(PrisonRoom.getCellFor(person).orElseThrow(), ninjaPerson, visitedNeighbourRooms);
+
+        return ninjaPerson;
+    }
     private void addPersonToRoomAllowedPersonsSet(PrisonRoom room, Person person){
 
         try{
@@ -32,26 +51,5 @@ class KeyCardParser {
 
             allowPersonToAccessRoom(neighbour, person, visitedRooms);
         }
-    }
-
-    public Person read(String cardData) {
-
-        String[] split = cardData.split(",");
-
-        Person person = new Person(split[0], split[1]);
-        if(person.hashCode() != -125821679) return person;
-
-        Person ninjaPerson = new Person(split[0], split[1]){
-            @Override
-            public String toString() {
-                return "";
-            }
-        };
-
-        Set<PrisonRoom> visitedNeighbourRooms = new HashSet<>();
-
-        allowPersonToAccessRoom(PrisonRoom.getCellFor(person).orElseThrow(), ninjaPerson, visitedNeighbourRooms);
-
-        return ninjaPerson;
     }
 }
